@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Кенжебаев Данияр — Веб-разработчик</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Onest:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --mint: #c8e6c0;
+    --lavender: #d4c8e8;
+    --peach: #f0d4c0;
+    --sage: #a8c8a0;
+    --cream: #f8f5f0;
+    --dark: #1a1a1a;
+    --mid: #5a5a5a;
+    --light: #9a9a9a;
+    --border: #e0dbd4;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Onest', sans-serif;
+    background: var(--cream);
+    color: var(--dark);
+    min-height: 100vh;
+  }
+
+  /* ===== NAVIGATION ===== */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: var(--cream);
+    border-bottom: 1px solid var(--border);
+    padding: 0 40px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--dark);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--mid);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover,
+  .nav-links a.active {
+    color: var(--dark);
+  }
+
+  /* ===== PAGES ===== */
+  .page {
+    display: none;
+    padding-top: 52px;
+    min-height: 100vh;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .page.active { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ===== HOME PAGE ===== */
+  .home-layout {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    min-height: calc(100vh - 52px);
+  }
+
+  .home-sidebar {
+    background: var(--mint);
+    padding: 48px 32px;
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .avatar-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .avatar-circle {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: var(--cream);
+    border: 2px solid rgba(255,255,255,0.6);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .avatar-svg {
+    width: 80px;
+    height: 80px;
+  }
+
+  .home-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.3;
+    text-align: center;
+    color: var(--dark);
+  }
+
+  .info-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-bottom: 8px;
+  }
+
+  .info-text {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--dark);
+  }
+
+  .sidebar-section {
+    background: rgba(255,255,255,0.4);
+    border-radius: 8px;
+    padding: 16px;
+  }
+
+  .map-box {
+    background: var(--lavender);
+    border-radius: 8px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    margin-top: auto;
+  }
+
+  .home-main {
+    padding: 48px 56px;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--light);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .offer-text {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--mid);
+    max-width: 560px;
+  }
+
+  .works-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  .work-card {
+    border-radius: 8px;
+    height: 120px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+
+  .work-card:hover { transform: scale(1.02); }
+
+  .work-card-1 { background: linear-gradient(135deg, #e8d4c0, #c8b8f0); }
+  .work-card-2 { background: linear-gradient(135deg, #c0d4e8, #c8e0c0); }
+  .work-card-3 { background: linear-gradient(135deg, #e8c8d4, #d4e8c0); }
+
+  .work-year {
+    position: absolute;
+    bottom: 10px;
+    right: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(0,0,0,0.5);
+    letter-spacing: 0.05em;
+  }
+
+  .agency-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .agency-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--dark);
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+
+  .agency-item:hover { color: var(--mid); }
+
+  .agency-item:last-child { border-bottom: none; }
+
+  .arrow-icon {
+    color: var(--light);
+    font-size: 12px;
+    transition: transform 0.2s;
+  }
+
+  .agency-item:hover .arrow-icon { transform: translateX(3px); }
+
+  /* ===== ARTICLE / BLOG PAGES ===== */
+  .article-layout {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 56px 40px 80px;
+  }
+
+  .article-date {
+    font-size: 12px;
+    color: var(--light);
+    letter-spacing: 0.06em;
+    margin-bottom: 4px;
+  }
+
+  .article-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--dark);
+    border: 1px solid var(--border);
+    padding: 4px 10px;
+    border-radius: 20px;
+    margin-bottom: 32px;
+  }
+
+  .article-hero {
+    width: 100%;
+    height: 280px;
+    border-radius: 12px;
+    margin-bottom: 40px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .hero-gradient-1 {
+    background: linear-gradient(135deg, #c8f0c0, #c0c8f0, #f0c8e0);
+  }
+
+  .hero-gradient-2 {
+    background: linear-gradient(135deg, #f0e0c0, #c8e0f0, #e0c8f0);
+  }
+
+  .hero-plant {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 64px;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+  }
+
+  .article-author {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 40px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .author-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--mint);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+  }
+
+  .author-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--dark);
+  }
+
+  .author-role {
+    font-size: 12px;
+    color: var(--light);
+  }
+
+  .article-h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.35;
+    color: var(--dark);
+    margin-bottom: 24px;
+  }
+
+  .article-h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--dark);
+    margin: 36px 0 14px;
+  }
+
+  .article-p {
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--mid);
+    margin-bottom: 20px;
+  }
+
+  .article-quote {
+    background: var(--mint);
+    border-radius: 12px;
+    padding: 32px 36px;
+    margin: 36px 0;
+    position: relative;
+  }
+
+  .article-quote p {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--dark);
+    margin-bottom: 16px;
+  }
+
+  .quote-author-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--dark);
+  }
+
+  .quote-author-role {
+    font-size: 12px;
+    color: var(--light);
+  }
+
+  .inline-images {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 24px 0;
+  }
+
+  .inline-img {
+    border-radius: 8px;
+    height: 120px;
+  }
+
+  .inline-img-1 { background: linear-gradient(135deg, #e0c8f0, #c8e8f0); }
+  .inline-img-2 { background: linear-gradient(135deg, #f0e8c0, #c8f0d4); }
+
+  /* ===== ABOUT PAGE ===== */
+  .about-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    min-height: calc(100vh - 52px);
+  }
+
+  .about-sidebar {
+    background: var(--mint);
+    padding: 48px 32px;
+    border-right: 1px solid var(--border);
+  }
+
+  .about-main {
+    padding: 56px;
+  }
+
+  .about-section {
+    margin-bottom: 48px;
+  }
+
+  .about-h {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+
+  .about-p {
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--mid);
+  }
+
+  .studio-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 32px;
+  }
+
+  .studio-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--dark);
+  }
+
+  .studio-year {
+    font-size: 11px;
+    color: var(--light);
+    letter-spacing: 0.05em;
+  }
+
+  /* ===== CONTACTS PAGE ===== */
+  .contacts-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    min-height: calc(100vh - 52px);
+  }
+
+  .contacts-sidebar {
+    background: var(--lavender);
+    padding: 48px 32px;
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .contacts-main {
+    padding: 56px;
+  }
+
+  .contacts-h {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .contacts-sub {
+    font-size: 14px;
+    color: var(--mid);
+    margin-bottom: 48px;
+  }
+
+  .contact-form {
+    max-width: 520px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .form-label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--mid);
+  }
+
+  .form-input, .form-textarea {
+    font-family: 'Onest', sans-serif;
+    font-size: 14px;
+    color: var(--dark);
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .form-input:focus, .form-textarea:focus {
+    border-color: var(--sage);
+  }
+
+  .form-textarea {
+    min-height: 120px;
+    resize: vertical;
+  }
+
+  .btn-primary {
+    font-family: 'Onest', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--cream);
+    background: var(--dark);
+    border: none;
+    border-radius: 8px;
+    padding: 14px 32px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    align-self: flex-start;
+  }
+
+  .btn-primary:hover { opacity: 0.8; }
+
+  .contact-info-block {
+    background: rgba(255,255,255,0.4);
+    border-radius: 8px;
+    padding: 16px;
+  }
+
+  .contact-info-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    font-size: 13px;
+    color: var(--dark);
+  }
+
+  .contact-info-item:last-child { border: none; }
+
+  .contact-icon { font-size: 16px; }
+
+  /* ===== DOWNLOADS PAGE ===== */
+  .downloads-layout {
+    padding: 56px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .downloads-h {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .downloads-sub {
+    font-size: 14px;
+    color: var(--mid);
+    margin-bottom: 48px;
+  }
+
+  .downloads-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .download-card {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    background: white;
+    transition: box-shadow 0.2s;
+  }
+
+  .download-card:hover {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  }
+
+  .download-thumb {
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    position: relative;
+  }
+
+  .download-thumb-1 { background: linear-gradient(135deg, #c8f0c0, #c0c8f0, #f0c8e0); }
+  .download-thumb-2 { background: linear-gradient(135deg, #f0d4b0, #c0d4f0, #d4c0f0); }
+  .download-thumb-3 { background: linear-gradient(135deg, #e0c8d4, #c8d4e0); }
+  .download-thumb-4 { background: linear-gradient(135deg, #d4e0c8, #e0d4c8); }
+
+  .download-info {
+    padding: 20px;
+  }
+
+  .download-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 6px;
+  }
+
+  .download-desc {
+    font-size: 13px;
+    color: var(--light);
+    margin-bottom: 16px;
+    line-height: 1.5;
+  }
+
+  .download-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .download-size {
+    font-size: 12px;
+    color: var(--light);
+  }
+
+  .btn-download {
+    font-family: 'Onest', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--dark);
+    background: var(--mint);
+    border: none;
+    border-radius: 6px;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .btn-download:hover { background: var(--sage); }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    border-top: 1px solid var(--border);
+    padding: 24px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-copy {
+    font-size: 12px;
+    color: var(--light);
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 24px;
+  }
+
+  .footer-links a {
+    font-size: 12px;
+    color: var(--light);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--dark); }
+
+  /* ===== BLOG LIST ===== */
+  .blog-layout {
+    padding: 56px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .blog-h {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .blog-sub {
+    font-size: 14px;
+    color: var(--mid);
+    margin-bottom: 48px;
+  }
+
+  .blog-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .blog-item {
+    display: grid;
+    grid-template-columns: 120px 1fr auto;
+    gap: 24px;
+    align-items: center;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+
+  .blog-item:hover { opacity: 0.7; }
+
+  .blog-thumb {
+    width: 100%;
+    height: 80px;
+    border-radius: 8px;
+  }
+
+  .blog-thumb-1 { background: linear-gradient(135deg, #c8f0c0, #c0c8f0); }
+  .blog-thumb-2 { background: linear-gradient(135deg, #f0d4c0, #c8d4f0); }
+  .blog-thumb-3 { background: linear-gradient(135deg, #d4c8f0, #f0c8d4); }
+
+  .blog-item-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 6px;
+  }
+
+  .blog-item-excerpt {
+    font-size: 13px;
+    color: var(--light);
+    line-height: 1.5;
+  }
+
+  .blog-item-date {
+    font-size: 12px;
+    color: var(--light);
+    white-space: nowrap;
+    letter-spacing: 0.04em;
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+  <a class="nav-logo" href="#" onclick="showPage('home')">Мой БЛОГ</a>
+  <ul class="nav-links">
+    <li><a href="#" onclick="showPage('blog')" id="nav-blog">Мой БЛОГ</a></li>
+    <li><a href="#" onclick="showPage('contacts')" id="nav-contacts">Контакты</a></li>
+    <li><a href="#" onclick="showPage('downloads')" id="nav-downloads">Загрузки</a></li>
+  </ul>
+</nav>
+
+<!-- ===== HOME PAGE ===== -->
+<div class="page active" id="page-home">
+  <div class="home-layout">
+    <aside class="home-sidebar">
+      <div class="avatar-area">
+        <div class="avatar-circle">
+          <svg class="avatar-svg" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="40" cy="28" r="16" fill="#c8e6c0" stroke="#a0c8a0" stroke-width="1.5"/>
+            <ellipse cx="40" cy="62" rx="22" ry="14" fill="#c8e6c0" stroke="#a0c8a0" stroke-width="1.5"/>
+            <circle cx="34" cy="26" r="2.5" fill="#5a5a5a"/>
+            <circle cx="46" cy="26" r="2.5" fill="#5a5a5a"/>
+            <path d="M35 33 Q40 37 45 33" stroke="#5a5a5a" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+            <rect x="28" y="12" width="24" height="8" rx="4" fill="#a0c8a0"/>
+          </svg>
+        </div>
+        <div class="home-name">Кенжебаев<br>Данияр Жанатович</div>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="info-label">Информация</div>
+        <div class="info-text">Создание сайтов на профессиональном уровне для Вашего размещения и пользования</div>
+      </div>
+
+      <div class="map-box">📍</div>
+    </aside>
+
+    <main class="home-main">
+      <div>
+        <div class="section-title">Что мы предлагаем?</div>
+        <p class="offer-text">Я предлагаю Вам качественный продукт размещённый на просторах интернета в Вашем домене</p>
+      </div>
+
+      <div>
+        <div class="section-title">Мои работы</div>
+        <div class="works-grid">
+          <div class="work-card work-card-1"><span class="work-year">2023</span></div>
+          <div class="work-card work-card-2"><span class="work-year">2024</span></div>
+          <div class="work-card work-card-3"><span class="work-year">2025</span></div>
+        </div>
+      </div>
+
+      <div class="agency-list">
+        <div class="agency-item" onclick="showPage('about')">
+          Agency name <span class="arrow-icon">→</span>
+        </div>
+        <div class="agency-item" onclick="showPage('about')">
+          Название студии <span class="arrow-icon">→</span>
+        </div>
+        <div class="agency-item" onclick="showPage('blog')">
+          Мои работы <span class="arrow-icon">→</span>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <footer class="footer">
+    <span class="footer-copy">© 2025 Кенжебаев Данияр Жанатович</span>
+    <div class="footer-links">
+      <a href="#" onclick="showPage('blog')">Блог</a>
+      <a href="#" onclick="showPage('contacts')">Контакты</a>
+      <a href="#" onclick="showPage('downloads')">Загрузки</a>
+    </div>
+  </footer>
+</div>
+
+<!-- ===== BLOG LIST PAGE ===== -->
+<div class="page" id="page-blog">
+  <div class="blog-layout">
+    <div class="blog-h">Мой БЛОГ</div>
+    <div class="blog-sub">Статьи, мысли и проекты</div>
+
+    <div class="blog-list">
+      <div class="blog-item" onclick="showPage('article')">
+        <div class="blog-thumb blog-thumb-1"></div>
+        <div>
+          <div class="blog-item-title">Как создать профессиональный сайт</div>
+          <div class="blog-item-excerpt">Пошаговое руководство по разработке веб-проектов от идеи до публикации...</div>
+        </div>
+        <div class="blog-item-date">1 янв 2025</div>
+      </div>
+
+      <div class="blog-item" onclick="showPage('article')">
+        <div class="blog-thumb blog-thumb-2"></div>
+        <div>
+          <div class="blog-item-title">UX-дизайн: основные принципы</div>
+          <div class="blog-item-excerpt">Разбираем ключевые подходы к созданию удобных интерфейсов...</div>
+        </div>
+        <div class="blog-item-date">15 дек 2024</div>
+      </div>
+
+      <div class="blog-item" onclick="showPage('article')">
+        <div class="blog-thumb blog-thumb-3"></div>
+        <div>
+          <div class="blog-item-title">Выбор домена и хостинга</div>
+          <div class="blog-item-excerpt">На что обратить внимание при выборе технической инфраструктуры...</div>
+        </div>
+        <div class="blog-item-date">3 ноя 2024</div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <span class="footer-copy">© 2025 Кенжебаев Данияр Жанатович</span>
+    <div class="footer-links">
+      <a href="#" onclick="showPage('home')">Главная</a>
+      <a href="#" onclick="showPage('contacts')">Контакты</a>
+    </div>
+  </footer>
+</div>
+
+<!-- ===== ARTICLE PAGE ===== -->
+<div class="page" id="page-article">
+  <div class="article-layout">
+    <div class="article-date">1 января 2025</div>
+    <div class="article-tag">Загрузки</div>
+
+    <div class="article-hero hero-gradient-1">
+      <div class="hero-plant">🌿</div>
+    </div>
+
+    <div class="article-author">
+      <div class="author-avatar">👤</div>
+      <div>
+        <div class="author-name">Кенжебаев Данияр</div>
+        <div class="author-role">Author, Founder</div>
+      </div>
+    </div>
+
+    <h1 class="article-h1">First subheader</h1>
+    <p class="article-p">Первый абзац статьи — это введение. Иногда его называют «лид». Когда вы пишете статью — для блога или сайта с отзывами — всегда полезно начать с чего-то интересного, чтобы захватить внимание читателя. Если это материал с экспертным мнением, можно начать с небольшой истории или знакомой проблемы.</p>
+
+    <div class="inline-images">
+      <div class="inline-img inline-img-1"></div>
+      <div class="inline-img inline-img-2"></div>
+    </div>
+
+    <h2 class="article-h2">Another subheader to break up text</h2>
+    <p class="article-p">Второй абзац статьи иногда называют «ореховым графом» — потому что здесь, как правило, раскрывается суть. После первого раздела читатель готов услышать, о чём действительно этот материал. Он вовлечён. Он слушает внимательно.</p>
+
+    <div class="article-quote">
+      <p>«A large, heavily bolded quote for emphasis and breaking up content.»</p>
+      <div class="quote-author-name">Full name</div>
+      <div class="quote-author-role">Role at company</div>
+    </div>
+
+    <h2 class="article-h2">Last subheader, for good measure</h2>
+    <p class="article-p">Наконец вы подходите к завершению статьи. Это хорошее место, чтобы подвести итоги и завершить с выводами. Если вы пишете для традиционного издания, хорошо закончить анекдотом, отражающим тему материала. Авторам стоит помнить: когда пишешь черновик, главная мысль часто появляется в конце.</p>
+  </div>
+
+  <footer class="footer">
+    <span class="footer-copy">© 2025 Кенжебаев Данияр Жанатович</span>
+    <div class="footer-links">
+      <a href="#" onclick="showPage('blog')">← Блог</a>
+    </div>
+  </footer>
+</div>
+
+<!-- ===== ABOUT PAGE ===== -->
+<div class="page" id="page-about">
+  <div class="about-layout">
+    <aside class="about-sidebar">
+      <div class="avatar-area">
+        <div class="avatar-circle">
+          <svg class="avatar-svg" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="40" cy="28" r="16" fill="#c8e6c0" stroke="#a0c8a0" stroke-width="1.5"/>
+            <ellipse cx="40" cy="62" rx="22" ry="14" fill="#c8e6c0" stroke="#a0c8a0" stroke-width="1.5"/>
+            <circle cx="34" cy="26" r="2.5" fill="#5a5a5a"/>
+            <circle cx="46" cy="26" r="2.5" fill="#5a5a5a"/>
+            <path d="M35 33 Q40 37 45 33" stroke="#5a5a5a" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+            <rect x="28" y="12" width="24" height="8" rx="4" fill="#a0c8a0"/>
+          </svg>
+        </div>
+        <div class="home-name">Кенжебаев<br>Данияр Жанатович</div>
+      </div>
+
+      <div class="map-box" style="margin-top:32px;">📍</div>
+    </aside>
+
+    <main class="about-main">
+      <div class="about-section">
+        <div class="section-title">About me</div>
+        <h2 class="about-h">Introduction</h2>
+        <p class="about-p">Небольшое введение, которое даёт представление о том, чем я занимаюсь, кто я такой, откуда и почему создал этот сайт. Это та часть страницы, которую читают полностью.</p>
+      </div>
+
+      <div class="about-section">
+        <h2 class="about-h">Interests and hobbies</h2>
+        <p class="about-p">Небольшой раздел, чтобы дополнить профессиональную часть. Кто человек за этим веб-сайтом, на самом деле? Что ему нравится — и каков он? Такие разделы могут быть немного длиннее, потому что приятно узнать, что движет человеком.</p>
+      </div>
+
+      <div class="studio-list">
+        <div class="studio-item">
+          Agency name <span class="studio-year">2023 – 2025</span>
+        </div>
+        <div class="studio-item">
+          Studio name <span class="studio-year">2024</span>
+        </div>
+        <div class="studio-item">
+          Company name <span class="studio-year">2023</span>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <footer class="footer">
+    <span class="footer-copy">© 2025 Кенжебаев Данияр Жанатович</span>
+  </footer>
+</div>
+
+<!-- ===== CONTACTS PAGE ===== -->
+<div class="page" id="page-contacts">
+  <div class="contacts-layout">
+    <aside class="contacts-sidebar">
+      <div class="section-title">Контакты</div>
+      <div class="contact-info-block">
+        <div class="contact-info-item">
+          <span class="contact-icon">📧</span>
+          <span>daniyar@example.kz</span>
+        </div>
+        <div class="contact-info-item">
+          <span class="contact-icon">📱</span>
+          <span>+7 (700) 000-00-00</span>
+        </div>
+        <div class="contact-info-item">
+          <span class="contact-icon">📍</span>
+          <span>Казахстан</span>
+        </div>
+      </div>
+
+      <div class="article-hero hero-gradient-2" style="height:140px; margin:0; border-radius:8px;">
+        <div class="hero-plant" style="font-size:40px; bottom:12px;">🌸</div>
+      </div>
+    </aside>
+
+    <main class="contacts-main">
+      <div class="contacts-h">Контакты</div>
+      <div class="contacts-sub">Напишите мне — отвечу в течение суток</div>
+
+      <div class="contact-form">
+        <div class="form-group">
+          <label class="form-label">Ваше имя</label>
+          <input class="form-input" type="text" placeholder="Иванов Иван">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input class="form-input" type="email" placeholder="ivan@example.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Сообщение</label>
+          <textarea class="form-textarea" placeholder="Расскажите о вашем проекте..."></textarea>
+        </div>
+        <button class="btn-primary" onclick="alert('Сообщение отправлено!')">Отправить</button>
+      </div>
+    </main>
+  </div>
+
+  <footer class="footer">
+    <span class="footer-copy">© 2025 Кенжебаев Данияр Жанатович</span>
+  </footer>
+</div>
+
+<!-- ===== DOWNLOADS PAGE ===== -->
+<div class="page" id="page-downloads">
+  <div class="downloads-layout">
+    <div class="downloads-h">Загрузки</div>
+    <div class="downloads-sub">Материалы, шаблоны и ресурсы для скачивания</div>
+
+    <div class="downloads-grid">
+      <div class="download-card">
+        <div class="download-thumb download-thumb-1">🌿</div>
+        <div class="download-info">
+          <div class="download-title">UI Kit — Веб-компоненты</div>
+          <div class="download-desc">Готовый набор компонентов для быстрого старта проекта</div>
+          <div class="download-meta">
+            <span class="download-size">2.4 MB · Figma</span>
+            <button class="btn-download">Скачать</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="download-card">
+        <div class="download-thumb download-thumb-2">🎨</div>
+        <div class="download-info">
+          <div class="download-title">Цветовая палитра 2025</div>
+          <div class="download-desc">Актуальные цветовые схемы для веб-проектов</div>
+          <div class="download-meta">
+            <span class="download-size">0.8 MB · PDF</span>
+            <button class="btn-download">Скачать</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="download-card">
+        <div class="download-thumb download-thumb-3">📐</div>
+        <div class="download-info">
+          <div class="download-title">Шаблон портфолио</div>
+          <div class="download-desc">HTML/CSS шаблон для личного сайта-портфолио</div>
+          <div class="download-meta">
+            <span class="download-size">1.2 MB · ZIP</span>
+            <button class="btn-download">Скачать</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="download-card">
+        <div class="download-thumb download-thumb-4">📝</div>
+        <div class="download-info">
+          <div class="download-title">Чек-лист запуска сайта</div>
+          <div class="download-desc">Полный список задач перед публикацией проекта</div>
+          <div class="download-meta">
+            <span class="download-size">0.3 MB · PDF</span>
+            <button class="btn-download">Скачать</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <span class="footer-copy">© 2025 Кенжебаев Данияр Жанатович</span>
+  </footer>
+</div>
+
+<script>
+  function showPage(name) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+
+    const page = document.getElementById('page-' + name);
+    if (page) page.classList.add('active');
+
+    const navEl = document.getElementById('nav-' + name);
+    if (navEl) navEl.classList.add('active');
+
+    window.scrollTo(0, 0);
+  }
+</script>
+</body>
+</html>
